@@ -1,0 +1,14 @@
+{
+  "/_app": "pages/_app.js",
+  "/_meta": "pages/_meta.js",
+  "/about": "pages/about.js",
+  "/guides/_meta": "pages/guides/_meta.js",
+  "/_error": "pages/_error.js",
+  "/docs/quickstart": "pages/docs/quickstart.js",
+  "/docs/Architecture": "pages/docs/Architecture.js",
+  "/": "pages/index.js",
+  "/guides": "pages/guides.js",
+  "/guides/discord_bot": "pages/guides/discord_bot.js",
+  "/guides/travel_agent": "pages/guides/travel_agent.js",
+  "/_document": "pages/_document.js"
+}

@@ -1,0 +1,15 @@
+.nextra-card > div {
+    padding: 0 1rem 1rem 1rem;
+    position: relative;
+    right: 0px;
+    order: 2;
+}
+
+#card {
+    display: flex; flex-direction: column;
+}
+
+#flex { }
+#a { order: 2; }
+#b { order: 1; }
+#c { order: 3; }
