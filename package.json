@@ -21,6 +21,7 @@
   "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
     "@swc/helpers": "^0.5.15",
+    "@types/react": "^18.3.12",
     "lucide-react": "^0.460.0",
     "next": "^13.5.7",
     "nextra": "^3.2.4",

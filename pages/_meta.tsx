@@ -1,10 +1,21 @@
+import { Home, BookText, PocketKnife } from 'lucide-react'
+
+const iconStyle = {
+  width: '1rem',
+  height: '1rem',
+  display: 'inline',
+  verticalAlign: 'middle',
+}
+
+
+
 const meta = {
   "index": {
-    "title": "Home",
+    "title": <><div style={iconStyle}><Home /></div> Get Started</>,
     "type": "page"
   },
   "docs": {
-    "title": "📖 Docs",
+    "title": <><BookText style={iconStyle} /> Docs</>,
     "type": "page"
   },
   // "cookbook": {
@@ -12,8 +23,14 @@ const meta = {
   //   "type": "page"
   // },
   "guides": {
-    "title": "🪜 Tutorials & Guides",
+    "title": <><PocketKnife style={iconStyle} /> Tutorials & Guides</>,
     "type": "page"
+  },
+  "apiReference": {
+    "title": "API Reference ↗",
+    "type": "page",
+    "href": "https://docs.rs/rig-core",
+    "newWindow": true
   },
   "contact": {
     "title": "Contact ↗",

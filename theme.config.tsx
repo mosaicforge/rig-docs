@@ -1,9 +1,21 @@
 import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
+import { Home } from 'lucide-react'
 
 const config: DocsThemeConfig = {
+  head: (
+    <>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Rig Crate Documentation" />
+      <meta name="author" content="0xPlaygrounds" />
+      <meta name="keywords" content="Rig, Docs, 0xPlaygrounds" />
+      <meta name="robots" content="index, follow" />
+      <link rel="icon" href="/favicon.ico" />
+    </>
+  ),
   logo: (
     <>
+      <Home />
       <img src="/rig-dark.svg" style={{ height: '2.5rem' }} alt="Rig Logo" className="dark-mode-logo" />
       <img src="/rig-light.svg" style={{ height: '2.5rem' }} alt="Rig Logo" className="light-mode-logo" />
       <style jsx>{`
