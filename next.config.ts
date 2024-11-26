@@ -11,6 +11,8 @@ export default withNextra(
   {
     output: 'export',
     images: { unoptimized: true },
-    basePath: '/rig-docs'
+    exports: {
+      basePath: '/rig-docs'
+    }
   }
 );
