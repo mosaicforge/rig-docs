@@ -1,9 +1,24 @@
 import { Cards } from 'nextra/components'
 import { WalletCards, Rocket } from 'lucide-react'
 
-# Get Started with Rig
-
+# Get Started with `cargo add rig-core{:bash}`
 Rig is a Rust library for building portable, modular, and lightweight Fullstack AI Agents. You can find API documentation on [docs.rs](https://docs.rs/rig-core).
+
+<details>
+<summary>
+Why Rig?
+</summary>
+Rig is a Rust library for building portable, modular, and lightweight Fullstack AI Agents. You can find API documentation on [docs.rs](https://docs.rs/rig-core).
+</details>
+
+<details>
+<summary>
+Why Rust?
+</summary>
+// TODO: Add content and embed
+https://benjdd.com/languages/
+
+</details>
 
 <br />
 <Cards>
@@ -17,7 +32,7 @@ Rig is a Rust library for building portable, modular, and lightweight Fullstack 
   />
   <Cards.Card id="card"
     title="🪜 Tutorials & Guides"
-    href="/guides/index"
+    href="/guides"
     children={    <div style={{ fontSize: '0.9em', color: '#666', whiteSpace: 'normal', wordWrap: 'break-word' }}>
       Explore tutorials and guides to enhance your skills.
     </div>
@@ -25,7 +40,7 @@ Rig is a Rust library for building portable, modular, and lightweight Fullstack 
   />
   <Cards.Card
     title="🍳 Cookbook (Build with Rig)"
-    href="/docs/cookbook/index"
+    href="/docs/cookbook"
     children={    <div style={{ fontSize: '0.9em', color: '#666', whiteSpace: 'normal', wordWrap: 'break-word' }}>
       Discover recipes and examples to build with Rig.
     </div>
@@ -72,3 +87,58 @@ Rig is a Rust library for building portable, modular, and lightweight Fullstack 
   }
   />
 </Cards>
+## High-level features
+ - Full support for LLM completion and embedding workflows
+ - Simple but powerful common abstractions over LLM providers (e.g. OpenAI, Cohere) and vector stores (e.g. MongoDB, in-memory)
+ - Integrate LLMs in your app with minimal boilerplate
+## Simple example:
+```rust
+  use rig::{completion::Prompt, providers::openai};
+
+  #[tokio::main]
+  async fn main() {
+      // Create OpenAI client and agent.
+      // This requires the `OPENAI_API_KEY` environment variable to be set.
+      let openai_client = openai::Client::from_env();
+
+      let gpt4 = openai_client.agent("gpt-4").build();
+
+      // Prompt the model and print its response
+      let response = gpt4
+          .prompt("Who are you?")
+          .await
+          .expect("Failed to prompt GPT-4");
+
+      println!("GPT-4: {response}");
+  }
+```
+Note: using `#[tokio::main]{:rust}` requires you enable tokio's `macros{:yaml}` and `rt-multi-thread{:yaml}` features
+or just `full{:yaml}` to enable all features `cargo add tokio --features macros,rt-multi-thread{:bash}`
+## Integrations
+### Model Providers
+Rig natively supports the following completion and embedding model provider integrations:
+ <br />
+<div style={{display: "flex", flexDirection: "row", gap: "0.5em"}}>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" alt="ChatGPT logo" width="55em"></img>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://www.fahimai.com/wp-content/uploads/2024/06/Untitled-design-7.png"></source>
+    <source media="(prefers-color-scheme: light)" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Claude_Ai.svg/1024px-Claude_Ai.svg.png"></source>
+    <img src="https://www.fahimai.com/wp-content/uploads/2024/06/Untitled-design-7.png" alt="Claude Anthropic logo" width="60em"></img>
+  </picture>
+  <img src="https://cdn.sanity.io/images/rjtqmwfu/production/0adbf394439f4cd0ab8b5b3b6fe1da10c8099024-201x200.svg" alt="Cohere logo" width="60em"></img>
+  <img src="https://logospng.org/download/google-gemini/google-gemini-1024.png" style={{background: "white", borderRadius: "10px", padding: "2px 5px", width: "4em"}} alt="Gemini logo"></img>
+   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/XAI-Logo.svg/512px-XAI-Logo.svg.png?20240912222841" style={{background: "white", borderRadius: "10px", padding: "5px 5px", width: "3em"}} alt="xAI logo"></img>
+  <img src="https://github.com/user-attachments/assets/4763ae96-ddc9-4f69-ab38-23592e6c4ead" style={{background: "white", borderRadius: "10px", padding: "2px 0px", width: "4.5em"}} alt="perplexity logo"></img>
+</div>
+
+ You can also implement your own model provider integration by defining types that
+ implement the [CompletionModel](crate::completion::CompletionModel) and [EmbeddingModel](crate::embeddings::EmbeddingModel) traits.
+ ### Vector Stores
+ Rig currently supports the following vector store integrations via companion crates:
+ - `rig-mongodb`: Vector store implementation for MongoDB
+ - `rig-lancedb`: Vector store implementation for LanceDB
+ - `rig-neo4j`: Vector store implementation for Neo4j
+ - `rig-qdrant`: Vector store implementation for Qdrant
+
+ You can also implement your own vector store integration by defining types that
+ implement the [VectorStoreIndex](crate::vector_store::VectorStoreIndex) trait.
