@@ -111,14 +111,14 @@ Here's a simplified diagram of the message processing flow:
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant DiscordBot
-    participant RigAgent
-    User->>DiscordBot: Sends message/command
-    DiscordBot->>RigAgent: Forwards message
-    RigAgent->>RigAgent: Processes message
-    RigAgent->>DiscordBot: Sends response
-    DiscordBot->>User: Delivers response
+participant User
+participant DiscordBot
+participant RigAgent
+User->>DiscordBot: Sends message/command
+DiscordBot->>RigAgent: Forwards message
+RigAgent->>RigAgent: Processes message
+RigAgent->>DiscordBot: Sends response
+DiscordBot->>User: Delivers response
 ```
 
 For an in-depth look at building a RAG system with Rig, refer to our comprehensive [article on building a simple RAG system with Rig](https://dev.to/0thtachi/build-a-rag-system-with-rig-in-under-100-lines-of-code-4422).
@@ -799,31 +799,6 @@ To further enhance your bot's capabilities, consider integrating it with other A
 In this guide, we've successfully built an AI-powered Discord bot using Rust and [Rig](https://rig.rs/). We've learned how to set up your environment, build a language model agent, integrate with Discord, and run your bot. With this foundation, you can continue to enhance and customize your bot, transforming it into a more robust system of autonomous agents to suit your needs.
 
 See you in the next guide in the Build with Rig series!
-
----
-
-## Further Resources
-
-To deepen your understanding and continue building with Rig, check out these resources:
-
-- [Rig Documentation](https://docs.rs/rig-core/latest/rig/)
-- [Rig GitHub Repository](https://github.com/0xPlaygrounds/rig)
-- [Examples Gallery Including This Walkthrough](https://github.com/0xPlaygrounds/awesome-rig/tree/main)
-- [OpenAI API Documentation](https://platform.openai.com/docs/api-reference)
-- [Understanding RAG Systems](https://www.promptingguide.ai/research/rag)
-
-**Your Feedback Matters!** We're offering a unique opportunity to shape the future of Rig:
-
-1. Build an AI-powered application using Rig.
-2. Share your experience and insights via this [feedback form](https://bit.ly/Rig-Review).
-3. Get a chance to win $100 and have your project featured in our showcase!
-
-Your insights will directly influence Rig's growth. 🦀✨
-
-Ad Astra,  
-[Tachi](https://x.com/0thTachi)  
-Co-Founder @ [Playgrounds Analytics](https://playgrounds.network/)
-
 ---
 
 ## Code Files
