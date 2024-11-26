@@ -1,6 +1,7 @@
 import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 import { Home } from 'lucide-react'
+import { BASE_PATH } from './pages/_app'
 
 const config: DocsThemeConfig = {
   head: (
@@ -15,8 +16,8 @@ const config: DocsThemeConfig = {
   ),
   logo: (
     <>
-      <img src="/rig-dark.svg" style={{ height: '2.5rem' }} alt="Rig Logo" className="dark-mode-logo" />
-      <img src="/rig-light.svg" style={{ height: '2.5rem' }} alt="Rig Logo" className="light-mode-logo" />
+      <img src={`${BASE_PATH}/rig-dark.svg`} style={{ height: '2.5rem' }} alt="Rig Logo" className="dark-mode-logo" />
+      <img src={`${BASE_PATH}/rig-light.svg`} style={{ height: '2.5rem' }} alt="Rig Logo" className="light-mode-logo" />
       <style jsx>{`
         .dark-mode-logo {
           display: none;
