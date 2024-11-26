@@ -13,6 +13,7 @@ export default withNextra(
     images: { unoptimized: true },
     exports: {
       basePath: '/rig-docs'
-    }
+    },
+    basePath: '/rig-docs'
   }
 );
