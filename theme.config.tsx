@@ -64,12 +64,9 @@ const config: DocsThemeConfig = {
               href="https://playgrounds.network"
             >
               <span>Powered by &nbsp;</span>
-              <img src="https://playgrounds.network/assets/PG-Logo.png" style={{ height: '2rem', display: 'inline' }} alt="Playgrounds Logo" />
+              <img src="https://playgrounds.network/assets/PG-Logo.png" style={{ height: '1.5rem', display: 'inline', position: 'relative', top: '0.22rem' }} alt="Playgrounds Logo" />
             </a>
           </div>
-          <p className="mt-6 text-xs">
-            © {new Date().getFullYear()} Rig Docs.
-          </p>
         </div>
       )
   }
