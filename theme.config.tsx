@@ -48,7 +48,7 @@ const config: DocsThemeConfig = {
     content: 'Edit this page on GitHub →'
   },
   feedback: {
-    content: 'Question? Give us feedback →',
+    content: '💡 Question? Give us feedback →',
     labels: 'feedback'
   },
   docsRepositoryBase: 'https://github.com/0xPlaygrounds/rig-docs',
