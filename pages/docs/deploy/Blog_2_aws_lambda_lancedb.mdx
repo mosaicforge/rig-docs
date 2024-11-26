@@ -213,7 +213,7 @@ filter @type = "REPORT"
 by bin(1d) as TimeRange, @memorySize / 1000000 as MemoryConfigurationMB
 ```
 
-![alt text](./images/deploy_2/rig-metrics.png)
+![alt text](/images/deploy_2/rig-metrics.png)
 
 > **Memory and runtime analysis**
 > At the memory configuration of **128MB**, the lambda has the lowest average memory usage of **96.1 MB** and the highest runtime of **5.1s**. At a memory configuration of **1GB**, the lambda has the highest average memory usage of **113.1 MB** and the lowest runtime of **4.4s**. In other words, with an extra ~7MB of memory usage, the lambda function was 700ms faster.
