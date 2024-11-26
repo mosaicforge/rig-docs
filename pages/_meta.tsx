@@ -14,10 +14,10 @@ const meta = {
     "title": <><Home style={iconStyle} /> Get Started</>,
     "type": "page"
   },
-  "Docs": {
-    "title": <><BookText style={iconStyle} /> Docs</>,
-    "type": "page"
-  },
+  // "Docs": {
+  //   "title": <><BookText style={iconStyle} /> Docs</>,
+  //   "type": "page"
+  // },
   // "cookbook": {
   //   "title": "🍳Cookbook & Guides",
   //   "type": "page"
