@@ -59,11 +59,11 @@ const config: DocsThemeConfig = {
               className="nextra-focus flex items-center gap-1 text-current"
               target="_blank"
               rel="noreferrer"
-              title="vercel.com homepage"
-              href="https://vercel.com?utm_source=nextra.site"
+              title="Playgrounds homepage"
+              href="https://playgrounds.network"
             >
-              <span>Powered by</span>
-              <img src="https://playgrounds.network/assets/PG-Logo.png" style={{ height: '2.5rem' }} alt="Playgrounds Logo" />
+              <span>Powered by &nbsp;</span>
+              <img src="https://playgrounds.network/assets/PG-Logo.png" style={{ height: '2rem', display: 'inline' }} alt="Playgrounds Logo" />
             </a>
           </div>
           <p className="mt-6 text-xs">
