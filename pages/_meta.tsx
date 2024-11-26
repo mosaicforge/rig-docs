@@ -14,7 +14,7 @@ const meta = {
     "title": <><Home style={iconStyle} /> Get Started</>,
     "type": "page"
   },
-  "docs": {
+  "Docs": {
     "title": <><BookText style={iconStyle} /> Docs</>,
     "type": "page"
   },
