@@ -11,7 +11,7 @@ const config: DocsThemeConfig = {
       <meta name="author" content="0xPlaygrounds" />
       <meta name="keywords" content="Rig, Docs, 0xPlaygrounds" />
       <meta name="robots" content="index, follow" />
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href={`${BASE_PATH}/favicon.ico`} />
     </>
   ),
   logo: (
