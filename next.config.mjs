@@ -4,7 +4,9 @@ const withNextra = nextra({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.tsx',
   defaultShowCopyCode: true,
-  staticImage: true
+  staticImage: true,
+  output: 'export',
+  images: { unoptimized: true },
 });
 
 export default withNextra();
