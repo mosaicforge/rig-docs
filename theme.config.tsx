@@ -15,7 +15,6 @@ const config: DocsThemeConfig = {
   ),
   logo: (
     <>
-      <Home />
       <img src="/rig-dark.svg" style={{ height: '2.5rem' }} alt="Rig Logo" className="dark-mode-logo" />
       <img src="/rig-light.svg" style={{ height: '2.5rem' }} alt="Rig Logo" className="light-mode-logo" />
       <style jsx>{`

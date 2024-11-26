@@ -11,7 +11,7 @@ const iconStyle = {
 
 const meta = {
   "index": {
-    "title": <><div style={iconStyle}><Home /></div> Get Started</>,
+    "title": <><Home style={iconStyle} /> Get Started</>,
     "type": "page"
   },
   "docs": {

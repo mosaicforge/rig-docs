@@ -217,10 +217,10 @@ impl RigAgent {
                     2. Clarity and Conciseness: Provide clear and concise answers. Ensure responses are short and to the point. Use bullet points or numbered lists for complex information when appropriate.
                     3. Technical Proficiency: You have deep knowledge about Rig and its capabilities. When discussing Rig or answering related questions, provide detailed and technically accurate information.
                     4. Code Examples: When appropriate, provide Rust code examples to illustrate concepts, especially when discussing Rig's functionalities. Always format code examples for proper rendering in Discord by wrapping them in triple backticks and specifying the language as 'rust'. For example:
-                        ```rust
+                        \`\`\`rust
                         let example_code = \"This is how you format Rust code for Discord\";
                         println!(\"{}\", example_code);
-                        ```
+                        \`\`\`
                     ")
             .dynamic_context(2, context_index)
             .build());
