@@ -26,7 +26,7 @@ concurrency:
 
 jobs:
   # Build job
-  build 🏗️:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -70,7 +70,7 @@ jobs:
           #
           # You may remove this line if you want to manage the configuration yourself.
           # static_site_generator: next
-      - name: Build with Next.js
+      - name: Build with Next.js 🏗️
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -78,13 +78,13 @@ jobs:
           path: ./out
 
   # Deployment job
-  deploy 🚀:
+  deploy :
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages 🚀
         id: deployment
         uses: actions/deploy-pages@v4
