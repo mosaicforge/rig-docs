@@ -8,11 +8,12 @@ const iconStyle = {
 }
 
 const meta = {
-  "index": "Home",
+  "index": "Overview",
   "0_quickstart": "Quickstart",
   "1_why_rig": "❓ Why Rig",
   "2_architecture": "🏛️ Architecture",
-  "3_integrations": "🔌 Integrations"
+  "3_concepts": "🧩 Concepts",
+  "4_integrations": "🔌 Integrations"
 }
 
 export default meta;

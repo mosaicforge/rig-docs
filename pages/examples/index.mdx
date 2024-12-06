@@ -1,0 +1,40 @@
+import { GraduationCap, FileText, BookHeart } from 'lucide-react'
+import { Cards } from 'nextra/components'
+
+<div className="section-title">Overview</div>
+
+An index of our team curated Rig code examples and showcase of the best usecases from the community.
+
+For more detailed walkthroughs and guides, please see our [Tutorials & Guides](/guides) section.
+
+### Showcase
+
+<Cards>
+    <Cards.Card
+    title={<><GraduationCap />arXiv Research Assistant</>}
+    href="https://rig-arxiv-agent-khjr.shuttle.app"
+    children={    <div style={{ fontSize: '0.9em', color: '#666', whiteSpace: 'normal', wordWrap: 'break-word' }}>
+        A `shuttle.dev` deployed research assistant that uses arxiv to find and summarize research papers.
+        </div>
+    }
+    arrow
+    target="_blank"
+    />
+    <Cards.Card
+    title={<><FileText />PDF Summarizer</>}
+    href=""
+    children={    <div style={{ fontSize: '0.9em', color: '#666', whiteSpace: 'normal', wordWrap: 'break-word' }}>
+        Coming soon™️...
+        </div>
+    }
+    />
+    <Cards.Card
+    title={<><BookHeart />Sentiment Analysis/Extractor</>}
+    href=""
+    children={    <div style={{ fontSize: '0.9em', color: '#666', whiteSpace: 'normal', wordWrap: 'break-word' }}>
+        Coming soon™️...
+        </div>
+    }
+    />
+</Cards>
+

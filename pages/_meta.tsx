@@ -1,4 +1,4 @@
-import { Home, BookText, PocketKnife } from 'lucide-react'
+import { Home, BookText, PocketKnife, CookingPot } from 'lucide-react'
 
 const iconStyle = {
   width: '1rem',
@@ -18,12 +18,12 @@ const meta = {
     "title": <><BookText style={iconStyle} /> Docs</>,
     "type": "page"
   },
-  // "cookbook": {
-  //   "title": "🍳Cookbook & Guides",
-  //   "type": "page"
-  // },
   "guides": {
     "title": <><PocketKnife style={iconStyle} /> Tutorials & Guides</>,
+    "type": "page"
+  },
+  "examples": {
+    "title": <><CookingPot style={iconStyle} /> Examples</>,
     "type": "page"
   },
   "apiReference": {

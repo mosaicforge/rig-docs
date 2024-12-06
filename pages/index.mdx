@@ -39,8 +39,8 @@ https://benjdd.com/languages/
   }
   />
   <Cards.Card
-    title="🍳 Cookbook (Build with Rig)"
-    href="/docs/cookbook"
+    title="🍳 Cookbook (Examples)"
+    href="/examples"
     children={    <div style={{ fontSize: '0.9em', color: '#666', whiteSpace: 'normal', wordWrap: 'break-word' }}>
       Discover recipes and examples to build with Rig.
     </div>
@@ -91,29 +91,7 @@ https://benjdd.com/languages/
  - Full support for LLM completion and embedding workflows
  - Simple but powerful common abstractions over LLM providers (e.g. OpenAI, Cohere) and vector stores (e.g. MongoDB, in-memory)
  - Integrate LLMs in your app with minimal boilerplate
-## Simple example:
-```rust
-  use rig::{completion::Prompt, providers::openai};
 
-  #[tokio::main]
-  async fn main() {
-      // Create OpenAI client and agent.
-      // This requires the `OPENAI_API_KEY` environment variable to be set.
-      let openai_client = openai::Client::from_env();
-
-      let gpt4 = openai_client.agent("gpt-4").build();
-
-      // Prompt the model and print its response
-      let response = gpt4
-          .prompt("Who are you?")
-          .await
-          .expect("Failed to prompt GPT-4");
-
-      println!("GPT-4: {response}");
-  }
-```
-Note: using `#[tokio::main]{:rust}` requires you enable tokio's `macros{:yaml}` and `rt-multi-thread{:yaml}` features
-or just `full{:yaml}` to enable all features `cargo add tokio --features macros,rt-multi-thread{:bash}`
 ## Integrations
 ### Model Providers
 Rig natively supports the following completion and embedding model provider integrations:
@@ -142,3 +120,27 @@ Rig natively supports the following completion and embedding model provider inte
 
  You can also implement your own vector store integration by defining types that
  implement the [VectorStoreIndex](crate::vector_store::VectorStoreIndex) trait.
+
+ ## Simple example:
+```rust
+  use rig::{completion::Prompt, providers::openai};
+
+  #[tokio::main]
+  async fn main() {
+      // Create OpenAI client and agent.
+      // This requires the `OPENAI_API_KEY` environment variable to be set.
+      let openai_client = openai::Client::from_env();
+
+      let gpt4 = openai_client.agent("gpt-4").build();
+
+      // Prompt the model and print its response
+      let response = gpt4
+          .prompt("Who are you?")
+          .await
+          .expect("Failed to prompt GPT-4");
+
+      println!("GPT-4: {response}");
+  }
+```
+Note: using `#[tokio::main]{:rust}` requires you enable tokio's `macros{:yaml}` and `rt-multi-thread{:yaml}` features
+or just `full{:yaml}` to enable all features `cargo add tokio --features macros,rt-multi-thread{:bash}`

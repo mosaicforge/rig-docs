@@ -1,0 +1,272 @@
+---
+title: Tools
+description: This section contains the concepts for Rig.
+---
+
+# Tool Embeddings in Rig
+
+## Overview
+
+Rig allows tools (functions, APIs, or other capabilities) to be embedded into vector space, enabling semantic search and retrieval of relevant tools based on natural language queries. This is particularly useful for building AI agents that can dynamically select appropriate tools based on context.
+
+## Tool Embedding System
+
+### Core Components
+
+1. **ToolEmbedding Trait**
+The foundation of tool embeddings is the `ToolEmbedding` trait, which extends the base `Tool` trait:
+
+```rust
+pub trait ToolEmbedding: Tool {
+    type InitError: std::error::Error;
+    type Context: Deserialize + Serialize;
+    type State: Send;
+    
+    fn embedding_docs(&self) -> Vec<String>;
+    fn context(&self) -> Self::Context;
+}
+```
+
+2. **ToolSchema**
+An intermediate representation used for embedding tools:
+
+```rust
+pub struct ToolSchema {
+    pub name: String,
+    pub context: serde_json::Value,
+    pub embedding_docs: Vec<String>,
+}
+```
+
+## How Tool Embeddings Work
+
+1. **Document Generation**
+   - Tools provide multiple embedding documents via `embedding_docs()`
+   - Each document represents a different aspect or use case
+   - Allows tools to be discovered from multiple "directions"
+
+2. **Context Preservation**
+   - Tools can store configuration in `Context`
+   - Context is serialized and stored with embeddings
+   - Retrieved when tool is loaded from vector store
+
+3. **State Management**
+   - Runtime configuration passed via `State`
+   - Allows for dynamic initialization
+   - Supports external dependencies (clients, APIs)
+
+## Example Usage
+
+```rust
+#[derive(Debug)]
+struct Calculator {
+    precision: u32,
+    api_key: String,
+}
+
+impl ToolEmbedding for Calculator {
+    type InitError = InitError;
+    type Context = u32;  // Store precision
+    type State = String; // API key
+    
+    fn embedding_docs(&self) -> Vec<String> {
+        vec![
+            "Performs mathematical calculations with configurable precision",
+            "Handles basic arithmetic operations: add, subtract, multiply, divide",
+            "Scientific calculator with support for advanced functions"
+        ]
+    }
+    
+    fn context(&self) -> Self::Context {
+        self.precision
+    }
+}
+```
+
+## Integration with RAG Systems
+
+Tools can be stored in vector stores and retrieved contextually:
+
+```rust
+// Store tool embeddings
+let tool_embeddings = EmbeddingsBuilder::new(model)
+    .document(ToolSchema::try_from(&calculator)?)?
+    .build()
+    .await?;
+
+// Query tools by natural language
+let relevant_tools = vector_store
+    .query("I need to perform complex math operations")
+    .await?;
+```
+
+## Best Practices
+
+1. **Embedding Documents**
+   - Provide diverse descriptions for better discovery
+   - Include use cases and capabilities
+   - Consider different phrasings/synonyms
+
+2. **Context Design**
+   - Keep context serializable and minimal
+   - Store only configuration, not runtime state
+   - Consider versioning for context schema
+
+3. **State Management**
+   - Pass heavy resources through State
+   - Initialize external clients at runtime
+   - Handle initialization failures gracefully
+
+## Common Use Cases
+
+1. **Dynamic Tool Selection**
+   - Agents can discover relevant tools
+   - Context-aware tool routing
+   - Natural language tool discovery
+
+2. **Tool Composition**
+   - Find complementary tools
+   - Build tool chains
+   - Semantic tool matching
+
+3. **Capability Management**
+   - Track available tools
+   - Version tool capabilities
+   - Manage tool dependencies
+
+The tool embedding system is referenced in:
+
+
+```116:134:rig-core/src/tool.rs
+/// Trait that represents an LLM tool that can be stored in a vector store and RAGged
+pub trait ToolEmbedding: Tool {
+    type InitError: std::error::Error + Send + Sync + 'static;
+
+    /// Type of the tool' context. This context will be saved and loaded from the
+    /// vector store when ragging the tool.
+    /// This context can be used to store the tool's static configuration and local
+    /// context.
+    type Context: for<'a> Deserialize<'a> + Serialize;
+
+    /// Type of the tool's state. This state will be passed to the tool when initializing it.
+    /// This state can be used to pass runtime arguments to the tool such as clients,
+    /// API keys and other configuration.
+    type State: Send;
+
+    /// A method returning the documents that will be used as embeddings for the tool.
+    /// This allows for a tool to be retrieved from multiple embedding "directions".
+    /// If the tool will not be RAGged, this method should return an empty vector.
+    fn embedding_docs(&self) -> Vec<String>;
+```
+
+
+And implemented in:
+
+
+```1:103:rig-core/src/embeddings/tool.rs
+//! The module defines the [ToolSchema] struct, which is used to embed an object that implements [crate::tool::ToolEmbedding]
+
+use crate::{tool::ToolEmbeddingDyn, Embed};
+use serde::Serialize;
+
+use super::embed::EmbedError;
+
+/// Embeddable document that is used as an intermediate representation of a tool when
+/// RAGging tools.
+#[derive(Clone, Serialize, Default, Eq, PartialEq)]
+pub struct ToolSchema {
+    pub name: String,
+    pub context: serde_json::Value,
+    pub embedding_docs: Vec<String>,
+}
+
+impl Embed for ToolSchema {
+    fn embed(&self, embedder: &mut super::embed::TextEmbedder) -> Result<(), EmbedError> {
+        for doc in &self.embedding_docs {
+            embedder.embed(doc.clone());
+        }
+        Ok(())
+    }
+}
+
+impl ToolSchema {
+    /// Convert item that implements [ToolEmbeddingDyn] to an [ToolSchema].
+    ///
+    /// # Example
+    /// ```rust
+    /// use rig::{
+    ///     completion::ToolDefinition,
+    ///     embeddings::ToolSchema,
+    ///     tool::{Tool, ToolEmbedding, ToolEmbeddingDyn},
+    /// };
+    /// use serde_json::json;
+    ///
+    /// #[derive(Debug, thiserror::Error)]
+    /// #[error("Math error")]
+    /// struct NothingError;
+    ///
+    /// #[derive(Debug, thiserror::Error)]
+    /// #[error("Init error")]
+    /// struct InitError;
+    ///
+    /// struct Nothing;
+    /// impl Tool for Nothing {
+    ///     const NAME: &'static str = "nothing";
+    ///
+    ///     type Error = NothingError;
+    ///     type Args = ();
+    ///     type Output = ();
+    ///
+    ///     async fn definition(&self, _prompt: String) -> ToolDefinition {
+    ///         serde_json::from_value(json!({
+    ///             "name": "nothing",
+    ///             "description": "nothing",
+    ///             "parameters": {}
+    ///         }))
+    ///         .expect("Tool Definition")
+    ///     }
+    ///
+    ///     async fn call(&self, args: Self::Args) -> Result<Self::Output, Self::Error> {
+    ///         Ok(())
+    ///     }
+    /// }
+    ///
+    /// impl ToolEmbedding for Nothing {
+    ///     type InitError = InitError;
+    ///     type Context = ();
+    ///     type State = ();
+    ///
+    ///     fn init(_state: Self::State, _context: Self::Context) -> Result<Self, Self::InitError> {
+    ///         Ok(Nothing)
+    ///     }
+    ///
+    ///     fn embedding_docs(&self) -> Vec<String> {
+    ///         vec!["Do nothing.".into()]
+    ///     }
+    ///
+    ///     fn context(&self) -> Self::Context {}
+    /// }
+    ///
+    /// let tool = ToolSchema::try_from(&Nothing).unwrap();
+    ///
+    /// assert_eq!(tool.name, "nothing".to_string());
+    /// assert_eq!(tool.embedding_docs, vec!["Do nothing.".to_string()]);
+    /// ```
+    pub fn try_from(tool: &dyn ToolEmbeddingDyn) -> Result<Self, EmbedError> {
+        Ok(ToolSchema {
+            name: tool.name(),
+            context: tool.context().map_err(EmbedError::new)?,
+            embedding_docs: tool.embedding_docs(),
+        })
+    }
+}
+
+```
+
+<br />
+
+<Cards.Card
+    title="API Reference (Tools)"
+    href="https://docs.rs/rig-core/latest/rig/tool/index.html"
+    arrow
+/>

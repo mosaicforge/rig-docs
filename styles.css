@@ -13,23 +13,37 @@
     display: flex; flex-direction: column;
 }
 
-#a { order: 2; }
-#b { order: 1; }
-#c { order: 3; }
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.section-surtitle {
+    font-size: 1.10rem;
+    font-weight: 700;
+    color: transparent;
+    background-image: linear-gradient(85.52deg, rgba(3, 205, 244) -7.27%, rgb(79, 138, 254) 108.87%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    top: 0.5rem;
+}
 
 
 
 /* Subsequent details should have less of a gap */
 details + details {
-    margin-top: 0.5rem !important;
-  }
-  
-  /* Fix detail padding */
-  details > div {
-    padding: 0.25rem;
-  }
-  
-  /* Details header should be bold */
-  details > summary {
-    font-weight: 700;
-  }
+  margin-top: 0.5rem !important;
+}
+
+/* Fix detail padding */
+details > div {
+  padding: 0.25rem;
+}
+
+/* Details header should be bold */
+details > summary {
+  font-weight: 700;
+}
+
