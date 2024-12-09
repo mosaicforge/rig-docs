@@ -1,18 +1,23 @@
-# Rig Agents: High-Level LLM Orchestration
+---
+title: Agents
+description: This section contains the concepts for Rig.
+---
+import { Cards, FileTree } from 'nextra/components'
 
-## Overview
+# Rig Agents: High-Level LLM Orchestration
 
 Agents in Rig provide a high-level abstraction for working with LLMs, combining models with context, tools, and configuration. They serve as the primary interface for building complex AI applications, from simple chatbots to sophisticated RAG systems.
 
 Reference: 
 
-```46:50:rig-core/src/lib.rs
-//! ## Agents
-//! Rig also provides high-level abstractions over LLMs in the form of the [Agent](crate::agent::Agent) type.
-//!
-//! The [Agent](crate::agent::Agent) type can be used to create anything from simple agents that use vanilla models to full blown
-//! RAG systems that can be used to answer questions using a knowledge base.
-```
+
+> Agents
+> Rig also provides high-level abstractions over LLMs in the form of the [Agent](crate::agent::Agent) type.
+> 
+> The [Agent](crate::agent::Agent) type can be used to create anything from simple agents that use vanilla models to full blown
+> RAG systems that can be used to answer questions using a knowledge base.
+
+<FileTree.File name="rig-core/src/lib.rs [46:50]" />
 
 
 ## Core Concepts
@@ -97,7 +102,7 @@ The agent automatically:
 
 Reference:
 
-```171:197:rig-core/src/agent.rs
+```rust filename="rig-core/src/agent.rs [171:197]"
         let dynamic_context = stream::iter(self.dynamic_context.iter())
             .then(|(num_sample, index)| async {
                 Ok::<_, VectorStoreError>(
@@ -137,7 +142,7 @@ Agents can:
 
 Reference:
 
-```199:221:rig-core/src/agent.rs
+```rust filename="rig-core/src/agent.rs [199:221]"
         let dynamic_tools = stream::iter(self.dynamic_tools.iter())
             .then(|(num_sample, index)| async {
                 Ok::<_, VectorStoreError>(

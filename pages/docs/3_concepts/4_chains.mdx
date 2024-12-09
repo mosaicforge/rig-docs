@@ -2,8 +2,8 @@
 title: Pipeline (Agentic Chain)
 description: This section contains the concepts for Rig.
 ---
+import { FileTree, Cards } from 'nextra/components'
 
-import { FileTree } from 'nextra/components'
 
 # Pipeline Module
 
@@ -89,7 +89,7 @@ assert_eq!(result, "16");
 Execute multiple operations concurrently using the `parallel!` macro:
 
 
-```196:208:rig-core/src/pipeline/parallel.rs
+```rust filename="rig-core/src/pipeline/parallel.rs [196:208]"
             ]
             values_and_positions: [
                 $($acc)*

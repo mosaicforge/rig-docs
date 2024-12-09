@@ -7,8 +7,6 @@ import { Cards } from 'nextra/components'
 
 # Completion in Rig: LLM Interaction Layer
 
-## Overview
-
 Rig's completion system provides a layered approach to interacting with Language Models, offering both high-level convenience and low-level control. The system is built around a set of traits that define different levels of abstraction for LLM interactions.
 
 ## Core Traits
@@ -42,7 +40,7 @@ async fn chat(&self, prompt: &str, history: Vec<Message>) -> Result<String, Prom
 
 Reference to implementation:
 
-```165:246:rig-core/src/completion.rs
+```rust filename="rig-core/src/completion.rs [165:246]"
 ...
         chat_history: Vec<Message>,
     ) -> impl std::future::Future<Output = Result<String, PromptError>> + Send;
@@ -249,11 +247,6 @@ impl CompletionModel for CustomProvider {
    - Reuse model instances
    - Batch similar requests
    - Monitor token usage
-
-4. **Context Optimization**
-   - Structure documents effectively
-   - Include relevant metadata
-   - Format context for readability
 
 ## See Also
 - [Agent System](./3_agent.md)

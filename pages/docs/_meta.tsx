@@ -13,7 +13,8 @@ const meta = {
   "1_why_rig": "❓ Why Rig",
   "2_architecture": "🏛️ Architecture",
   "3_concepts": "🧩 Concepts",
-  "4_integrations": "🔌 Integrations"
+  "4_integrations": "🔌 Integrations",
+  "5_extensions": "⚙️ Extensions"
 }
 
 export default meta;

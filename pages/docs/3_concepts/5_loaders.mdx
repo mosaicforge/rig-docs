@@ -2,10 +2,9 @@
 title: Loaders
 description: This section contains the concepts for Rig.
 ---
+import { Cards } from 'nextra/components'
 
 # Rig Loaders: File Loading and Processing
-
-## Overview
 
 Rig's loader system provides utilities for loading and preprocessing various file types, with a focus on structured data ingestion for LLM applications. The system is designed to be extensible and error-tolerant, with built-in support for common file types.
 
@@ -93,7 +92,7 @@ let processed_files = FileLoader::with_glob("*.txt")?
 
 Reference:
 
-```17:28:rig-core/examples/agent_with_loaders.rs
+```rust filename="rig-core/examples/agent_with_loaders.rs [17:28]"
     // Load in all the rust examples
     let examples = FileLoader::with_glob("rig-core/examples/*.rs")?
         .read_with_path()
@@ -113,7 +112,7 @@ Reference:
 
 Reference:
 
-```31:45:rig-core/src/loaders/pdf.rs
+```rust filename="rig-core/src/loaders/pdf.rs [31:45]"
     fn load(self) -> Result<Document, PdfLoaderError> {
         Document::load(self).map_err(PdfLoaderError::PdfError)
     }

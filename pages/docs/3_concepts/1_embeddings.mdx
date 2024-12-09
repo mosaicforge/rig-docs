@@ -2,11 +2,9 @@
 title: Embeddings
 description: This section contains the concepts for Rig.
 ---
-
+import { Cards } from 'nextra/components'
 
 # Embeddings in Rig
-
-## Overview
 
 Rig provides a comprehensive embeddings system for converting text and other data types into numerical vector representations that can be used for semantic search, similarity comparisons, and other NLP tasks.
 
@@ -94,30 +92,17 @@ impl Embed for Document {
 1. **Document Preparation**
    - Clean and normalize text before embedding
    - Consider chunking large documents
-   - Remove irrelevant content
+   - Remove irrelevant embedding content
 
 2. **Error Handling**
    - Handle provider API errors gracefully
    - Validate vector dimensions
    - Check for empty or invalid input
 
-3. **Resource Management**
-   - Batch similar documents together
-   - Reuse embedding models
-   - Cache frequently used embeddings
-
 4. **Batching**
    - Use `EmbeddingsBuilder` for multiple documents
    - Respects provider's max batch size
    - Automatically handles concurrent processing
-
-- **Vector Stores**: Store and query embeddings efficiently
-- **RAG Systems**: Use embeddings for semantic search
-- **Agents**: Combine with LLM processing for intelligent responses
-- **Tools**: Embed tool descriptions for contextual retrieval
-
-For implementation details, see the [API Reference](https://docs.rs/rig-core/latest/rig/embeddings/index.html).
-
 
 ## See Also
 
