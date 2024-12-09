@@ -108,18 +108,6 @@ impl Client {
 Tool calling and response handling:
 
 ```rust filename="rig-core/src/providers/openai.rs [350:450]"
-...
-                    ),
-                    raw_response: value,
-                })
-            }
-            _ => Err(CompletionError::ResponseError(
-                "Response did not contain a message or tool call".into(),
-            )),
-        }
-    }
-}
-
 #[derive(Debug, Deserialize)]
 pub struct Choice {
     pub index: usize,
