@@ -2,9 +2,8 @@ import { Home, BookText, PocketKnife, CookingPot } from 'lucide-react'
 
 const iconStyle = {
   width: '1rem',
-  height: '1rem',
   display: 'inline',
-  verticalAlign: 'middle',
+  verticalAlign: '-0.4rem',
 }
 
 
