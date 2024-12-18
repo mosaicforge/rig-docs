@@ -9,7 +9,7 @@ const meta = {
   "index": "Overview",
   "0_quickstart": {title: <><Rocket style={iconStyle} /> &nbsp; Quickstart</>},
   "1_why_rig": {title: <><Lightbulb style={iconStyle} /> &nbsp; Why Rig</>},
-  "2_faq": {title: <><MessageCircleQuestion style={iconStyle} /> &nbsp; FAQ</>},
+  //"2_faq": {title: <><MessageCircleQuestion style={iconStyle} /> &nbsp; FAQ</>},
   "3_architecture": {title: <><Landmark style={iconStyle} /> &nbsp; Architecture</>},
   "4_concepts": {title: <><Puzzle style={iconStyle} /> &nbsp; Concepts</>},
   "5_integrations": {title: <><Unplug style={iconStyle} /> &nbsp; Integrations</>},
