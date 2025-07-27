@@ -2,14 +2,14 @@
 title: Agents
 description: This section contains the concepts for Rig.
 ---
-import { Cards, FileTree } from 'nextra/components'
+
+import { Cards, FileTree } from "nextra/components";
 
 # Rig Agents: High-Level LLM Orchestration
 
 Agents in Rig provide a high-level abstraction for working with LLMs, combining models with context, tools, and configuration. They serve as the primary interface for building complex AI applications, from simple chatbots to sophisticated RAG systems.
 
-Reference:
-
+# Reference:
 
 > Agents
 > Rig also provides high-level abstractions over LLMs in the form of the [Agent](crate::agent::Agent) type.
@@ -19,7 +19,6 @@ Reference:
 
 <FileTree.File name="rig-core/src/lib.rs [46:50]" />
 
-
 ## Core Concepts
 
 ### Agent Structure
@@ -27,11 +26,13 @@ Reference:
 An Agent consists of:
 
 1. **Base Components**
+
    - Completion Model (e.g., GPT-4, Claude)
    - System Prompt (preamble)
    - Configuration (temperature, max tokens)
 
 2. **Context Management**
+
    - Static Context: Always available documents
    - Dynamic Context: RAG-based contextual documents
    - Vector Store Integration
@@ -95,6 +96,7 @@ let agent = openai.agent("gpt-4")
 ### Dynamic Context Resolution
 
 The agent automatically:
+
 1. Processes incoming prompts
 2. Queries vector stores for relevant context
 3. Integrates retrieved information
@@ -132,10 +134,10 @@ Reference:
             .map_err(|e| CompletionError::RequestError(Box::new(e)))?;
 ```
 
-
 ### Tool Management
 
 Agents can:
+
 - Maintain static and dynamic tool sets
 - Resolve tool calls automatically
 - Handle tool execution and error states
@@ -168,7 +170,6 @@ Reference:
             .map_err(|e| CompletionError::RequestError(Box::new(e)))?;
 ```
 
-
 ### Flexible Configuration
 
 The AgentBuilder pattern provides extensive configuration options:
@@ -199,11 +200,13 @@ let agent = AgentBuilder::new(model)
 ## Best Practices
 
 1. **Context Management**
+
    - Keep static context minimal and focused
    - Use dynamic context for large knowledge bases
    - Consider context window limitations
 
 2. **Tool Integration**
+
    - Prefer static tools for core functionality
    - Use dynamic tools for context-specific operations
    - Implement proper error handling in tools
@@ -216,6 +219,7 @@ let agent = AgentBuilder::new(model)
 ## Common Patterns
 
 ### Conversational Agents
+
 ```rust
 let chat_agent = openai.agent("gpt-4")
     .preamble("You are a conversational assistant.")
@@ -228,6 +232,7 @@ let response = chat_agent
 ```
 
 ### RAG Knowledge Base
+
 ```rust
 let kb_agent = openai.agent("gpt-4")
     .preamble("You are a knowledge base assistant.")
@@ -237,7 +242,9 @@ let kb_agent = openai.agent("gpt-4")
 ```
 
 ### Agents with Tools
+
 When using `AgentBuilder`, you can add all kinds of tools to your `Agent`:
+
 ```rust
 let tool_agent = openai.agent("gpt-4")
     .preamble("You are a tool-using assistant.")
@@ -249,6 +256,7 @@ let tool_agent = openai.agent("gpt-4")
 ```
 
 By default, it will return the tool result. However, you can add multi-turns to be able to allow the LLM to use the tool results:
+
 ```rust
 let res = tool_agent
     .prompt("Please calculate 2+5")
@@ -264,6 +272,7 @@ The above example will have a maximum of 1 turn due to passing a value of 1 into
 There is no arbitrary maximum on the amount of turns possible, although you may want to use reasonable turn limits to avoid errors.
 
 ## See Also
+
 - [Completion Models](./completion.mdx)
 - [Vector Stores](../integrations/vector_stores.mdx)
 - [Tools](./tools.mdx)
@@ -272,7 +281,7 @@ There is no arbitrary maximum on the amount of turns possible, although you may 
 <br />
 
 <Cards.Card
-    title="API Reference (Agent)"
-    href="https://docs.rs/rig-core/latest/rig/agent/index.html"
-    arrow
+  title="API Reference (Agent)"
+  href="https://docs.rs/rig-core/latest/rig/agent/index.html"
+  arrow
 />
